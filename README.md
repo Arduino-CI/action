@@ -29,12 +29,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: Arduino-CI/action@0.1.0
+      - uses: Arduino-CI/action@v0.1.0
 ```
 
 ### Add badge in your repository README
 
-You can show Super-Linter status with a badge in your repository README
+You can show Arduino CI status with a badge in your repository README
 
 ```markdown
 [![Arduino CI](https://github.com/<OWNER>/<REPOSITORY>/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
