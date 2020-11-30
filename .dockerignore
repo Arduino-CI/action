@@ -1,0 +1,5 @@
+# basically everything
+.gitignore
+Dockerfile
+action.yml
+README.md
