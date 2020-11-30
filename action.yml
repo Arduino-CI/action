@@ -1,0 +1,9 @@
+name: 'arduino_ci'
+author: 'Ian Katz'
+description: 'Run arduino_ci: unit tests and example compilation'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'cpu'
+  color: 'blue'
