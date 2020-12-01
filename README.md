@@ -7,15 +7,17 @@ This repository is for the **GitHub Action** to run [`arduino_ci`](https://githu
 - Contributions to your Arduino library are tested automatically, _without_ the need for hardware present
 - Example sketches in your `examples/` directory are compiled automatically, to detect broken code in the default branch
 
-## Enabling it on your own project
+
+## Adding Arduino CI To Your Project
 
 1. Create a new file in your repository called `.github/workflows/arduino_ci.yml`
-2. Copy the example workflow from below into that new file, no extra configuration required
+2. Copy an example workflow from below into that new file, no extra configuration required
 3. Commit that file to a new branch
 4. Open up a pull request and observe the action working
 5. Merge into your default branch to enable testing of all following pull requests
 
-Contents of `.github/workflows/arduino_ci.yml`
+
+### Simplest configuration
 
 ```yml
 ---
@@ -32,12 +34,14 @@ jobs:
       - uses: Arduino-CI/action@v0.1.0
 ```
 
-### Add badge in your repository README
+Note that this will fail if you don't have any unit tests defined.  For information on Arduino unit testing with `arduino_ci`, see the [`REFERENCE.md` for Arduino CI](https://github.com/Arduino-CI/arduino_ci/blob/master/REFERENCE.md)
 
-You can show Arduino CI status with a badge in your repository README
+## Status Badges
+
+You can show Arduino CI status with a badge in your repository `README.md`
 
 ```markdown
 [![Arduino CI](https://github.com/<OWNER>/<REPOSITORY>/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
 ```
 
-> Note that `Arduino%20CI` in the URL matches the `name: Arduino CI` line in the YAML file above
+> Note that `Arduino%20CI` in the URL matches the `name: Arduino CI` line in the example YAML files above
