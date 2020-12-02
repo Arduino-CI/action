@@ -44,4 +44,7 @@ You can show Arduino CI status with a badge in your repository `README.md`
 [![Arduino CI](https://github.com/<OWNER>/<REPOSITORY>/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
 ```
 
-> Note that `Arduino%20CI` in the URL matches the `name: Arduino CI` line in the example YAML files above
+> Note that
+> * you must replace `<OWNER>` with your GitHub username
+> * you must replace `<REPOSITORY>` with the name of the GitHub repository
+> * `Arduino%20CI` in the URL must match the `name: Arduino CI` line in the example YAML files above
