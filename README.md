@@ -62,3 +62,20 @@ You can show Arduino CI status with a badge in your repository `README.md`
 > * you must replace `<OWNER>` with your GitHub username
 > * you must replace `<REPOSITORY>` with the name of the GitHub repository
 > * `Arduino%20CI` in the URL must match the `name: Arduino CI` line in the example YAML files above
+
+
+## Configuring Behavior of the Arduino CI Test Runner Itself
+
+When configuring the test runner itself, it's more efficient to run `arduino_ci` locally -- it works on the same OSes as the Arduino IDE.  Instructions for setting that up can be found at [the `arduino_ci` project homepage on GitHub](https://github.com/Arduino-CI/arduino_ci).
+
+
+### Writing Unit Tests
+
+For information on Arduino unit testing with `arduino_ci`, see the [`REFERENCE.md` for Arduino CI's section on unit testing](https://github.com/Arduino-CI/arduino_ci/blob/master/REFERENCE.md#writing-unit-tests-in-test)
+
+
+### Testing Different Arduino Platforms
+
+By default, any unit tests and example sketches are tested against a modest set of Arduino platforms.  This configuration can be overridden in several specific ways; for details, see the [`REFERENCE.md` for Arduino CI's section on CI configuration](https://github.com/Arduino-CI/arduino_ci/blob/master/REFERENCE.md#indirectly-overriding-build-behavior-medium-term-use-and-advanced-options)
+
+The default configuration is [available in the `arduino_ci` project](https://github.com/Arduino-CI/arduino_ci/blob/master/misc/default.yml), and shows how the platforms and packages are configured (including 3rd-party board provider information).
