@@ -7,9 +7,9 @@ ARG BUILD_VERSION
 
 # Values we set in more than one place in this file
 ARG ARDUINO_CI_REPO="https://github.com/ArduinoCI/action"
-ARG ARDUINO_CI_MAINTAINER="Ian <ianfixes@gmail.com>"
-ARG ARDUINO_CLI_GITREF="tag: 'v1.1.0'"
-#ARG ARDUINO_CLI_GITREF="branch: '2020-12-01_fixes'"
+ARG ARDUINO_CI_MAINTAINER="Arduino Continuous Integration <arduino.continuous.integration@gmail.com>"
+#ARG ARDUINO_CLI_GITREF="tag: 'v1.1.0'"
+ARG ARDUINO_CLI_GITREF="branch: '2020-12-28_wrapup'"
 
 LABEL com.github.actions.name="Arduino CI" \
       com.github.actions.description="Unit testing and example compilation for Arduino libraries" \
@@ -50,7 +50,7 @@ RUN true \
 RUN true \
   && mkdir -p /action/bundle \
   && echo "source 'https://rubygems.org'" > $BUNDLE_GEMFILE \
-  && echo "gem 'arduino_ci', git: 'https://github.com/Arduino-CI/arduino_ci.git', $ARDUINO_CLI_GITREF" >> $BUNDLE_GEMFILE \
+  && echo "gem 'arduino_ci', git: 'https://github.com/ianfixes/arduino_ci.git', $ARDUINO_CLI_GITREF" >> $BUNDLE_GEMFILE \
   && cat $BUNDLE_GEMFILE \
   && bundle install --gemfile /action/Gemfile --path /action/bundle \
   && find /action |grep arduino_ci.rb

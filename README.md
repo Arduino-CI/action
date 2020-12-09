@@ -46,9 +46,29 @@ jobs:
           # If you'd rather have the test runner fail the test in the
           #  absence of either tests or examples, uncommenting either of
           #  the following lines (as appropriate) will enforce that.
+          #
+          EXPECT_EXAMPLES: false
+          EXPECT_UNITTESTS: false
 
-          # EXPECT_EXAMPLES: true
-          # EXPECT_UNITTESTS: true
+          # Not all libraries are in the root direcotry of a repository.
+          # Specifying the path of the library here (relative to the root
+          # of the repository) will adjust that.
+          #
+          # The default is the current directory
+          #
+          # USE_SUBDIR: .
+
+          # Although dependencies will be installed automatically via the
+          # library manager, your library under test may require an
+          # unofficial version of a dependency.  In those cases, the custom
+          # libraries must be insalled prior to the test execution; those
+          # installation commands should be placed in a shell script (that
+          # will be executed by /bin/sh) and the shell script in your repo.
+          #
+          # Then, set this variable to the path to that file (relative to
+          # the repository root)
+          #
+          # CUSTOM_INIT_SCRIPT: install_dependencies.sh
 ```
 
 ### Status Badges

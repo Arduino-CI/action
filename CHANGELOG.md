@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Publish docker image to GitHub packages on `latest` branch and after tagging
 - Instructions for testing locally with Docker
+- Adopt new `arduino_ci` version that enables `CUSTOM_INIT_SCRIPT` and `USE_SUBDIR` environment variables
 
 ### Changed
 
