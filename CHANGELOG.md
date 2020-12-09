@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Publish docker image to GitHub packages on `latest` branch and after tagging
+- Instructions for testing locally with Docker
 
 ### Changed
 
