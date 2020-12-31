@@ -43,8 +43,14 @@ RUN true \
       curl \
       g++ \
       time \
+      python \
+      python-pip \
+      python3 \
+      python3-pip \
   && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && pip install pyserial \
+  && pip3 install pyserial
 
 # install arduino_ci
 RUN true \
