@@ -7,11 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Publish docker image to GitHub packages on `latest` branch and after tagging
-- Instructions for testing locally with Docker
-- Adopt new `arduino_ci` version that enables `CUSTOM_INIT_SCRIPT` and `USE_SUBDIR` environment variables
-- Python dependencies for espXX board compilation (unfortunately assumed to be present in image, not installed by board manager)
-- Instructions for new environment variable `SKIP_LIBRARY_PROPERTIES`
 
 ### Changed
 
@@ -22,6 +17,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 ### Security
+
+
+## [0.1.2] - 2021-01-06
+### Added
+- Publish docker image to GitHub packages on `latest` branch and after tagging
+- Instructions for testing locally with Docker
+- Adopt new `arduino_ci` version that enables `CUSTOM_INIT_SCRIPT` and `USE_SUBDIR` environment variables
+- Python dependencies for espXX board compilation (unfortunately assumed to be present in image, not installed by board manager)
+- Instructions for new environment variable `SKIP_LIBRARY_PROPERTIES`
 
 
 ## [0.1.1] - 2020-12-02
@@ -40,5 +44,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Initial implementation of action
 
 
-[Unreleased]: https://github.com/Arduino-CI/action/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/Arduino-CI/action/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Arduino-CI/arduino_ci/compare/v0.0.0...v0.1.0
