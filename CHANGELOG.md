@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Instructions for testing locally with Docker
 - Adopt new `arduino_ci` version that enables `CUSTOM_INIT_SCRIPT` and `USE_SUBDIR` environment variables
 - Python dependencies for espXX board compilation (unfortunately assumed to be present in image, not installed by board manager)
+- Instructions for new environment variable `SKIP_LIBRARY_PROPERTIES`
 
 ### Changed
 

@@ -7,7 +7,7 @@ This repository is for the **GitHub Action** to run [`arduino_ci`](https://githu
 
 - Contributions to your Arduino library are tested automatically, _without_ the need for hardware present
 - Example sketches in your `examples/` directory are compiled automatically, to detect broken code in the default branch
-
+- `library.properties` is scanned for correctness
 
 ## Adding Arduino CI Pull Request Tests To Your Project
 
@@ -24,7 +24,7 @@ These contents for `.github/workflows/arduino_test_runner.yml` should work for m
 
 ```yml
 ---
-name: Arduino CI
+name: Arduino_CI
 
 on: [pull_request]
 
@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: Arduino-CI/action@v0.1.0
+      - uses: Arduino-CI/action@v0.1.2   # v0.1.2 or the latest version
         env:
           # Not all libraries include examples or unit tests.  The default
           #  behavior of arduino_ci is to assume that "if the files don't
@@ -47,10 +47,20 @@ jobs:
           #  absence of either tests or examples, uncommenting either of
           #  the following lines (as appropriate) will enforce that.
           #
-          EXPECT_EXAMPLES: false
-          EXPECT_UNITTESTS: false
+          # EXPECT_EXAMPLES: false
+          # EXPECT_UNITTESTS: false
 
-          # Not all libraries are in the root direcotry of a repository.
+          # Scanning library.properties for issues is a relatively new
+          #  feature, and we may not have implemented it perfectly just
+          #  yet.
+          #
+          # If you find that it incorrectly fails your library, you can
+          #  skip it.  (Please open an issue against arduino_ci as well
+          #  so that it can be fixed.)
+          #
+          # SKIP_LIBRARY_PROPERTIES: false
+
+          # Not all libraries are in the root directory of a repository.
           # Specifying the path of the library here (relative to the root
           # of the repository) will adjust that.
           #
@@ -76,13 +86,13 @@ jobs:
 You can show Arduino CI status with a badge in your repository `README.md`
 
 ```markdown
-[![Arduino CI](https://github.com/<OWNER>/<REPOSITORY>/workflows/Arduino%20CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
+[![Arduino CI](https://github.com/<OWNER>/<REPOSITORY>/workflows/Arduino_CI/badge.svg)](https://github.com/marketplace/actions/arduino_ci)
 ```
 
 > Note that
 > * you must replace `<OWNER>` with your GitHub username
 > * you must replace `<REPOSITORY>` with the name of the GitHub repository
-> * `Arduino%20CI` in the URL must match the `name: Arduino CI` line in the example YAML files above
+> * `Arduino_CI` in the URL must match the `name: Arduino_CI` line in the example YAML files above
 
 
 ## Configuring Behavior of the Arduino CI Test Runner Itself
@@ -97,7 +107,7 @@ For information on Arduino unit testing with `arduino_ci`, see the [`REFERENCE.m
 
 ### Testing Different Arduino Platforms
 
-By default, any unit tests and example sketches are tested against a modest set of Arduino platforms.  This configuration can be overridden in several specific ways; for details, see the [`REFERENCE.md` for Arduino CI's section on CI configuration](https://github.com/Arduino-CI/arduino_ci/blob/master/REFERENCE.md#indirectly-overriding-build-behavior-medium-term-use-and-advanced-options)
+By default, any unit tests and example sketches are tested against a modest set of Arduino platforms.  If you have architectures defined in `library.properties`, that will further refine the set of what is tested.  You can further override this configuration in several specific ways; for details, see the [`REFERENCE.md` for Arduino CI's section on CI configuration](https://github.com/Arduino-CI/arduino_ci/blob/master/REFERENCE.md#indirectly-overriding-build-behavior-medium-term-use-and-advanced-options)
 
 The default configuration is [available in the `arduino_ci` project](https://github.com/Arduino-CI/arduino_ci/blob/master/misc/default.yml), and shows how the platforms and packages are configured (including 3rd-party board provider information).
 
@@ -115,7 +125,7 @@ Path                               |Contents
 `/pathTo/Arduino/libraries/mylib`  | Your library under test, called `mylib`
 `/pathTo/Arduino/libraries/custom` | A custom library
 
-In this situation, you've got a mix of libraries installed locally (the one that will be tested amongst any possible dependencies), and they all work as expected (even though you're not quite sure all of them are up to date, nor whether they have local modifications that aren't part of the official library release.  This setup won't work in CI, but by volume-mounting the libraries directory into the container and using your own library as the working directory, you can ensure that arduino_ci is using the _exact_ same set of dependencies.
+In this situation, you've got a mix of libraries installed locally (the one that will be tested amongst any possible dependencies), and they all work as expected (even though you're not quite sure all of them are up to date, nor whether they have local modifications that aren't part of the official library release).  This setup won't work in CI, but by volume-mounting the libraries directory into the container and using your own library as the working directory, you can ensure that arduino_ci is using the _exact_ same set of dependencies.
 
 > This is also the fastest way to test new versions of dependencies.
 
@@ -168,7 +178,7 @@ docker run --rm \
 ```
 
 
-### Your Arduino Library is a subdirecotry of a monorepo, you need libraries or versions as dependencies that can't be installed by name from the Arduino library manager, you wrote a script to install them automatically
+### Your Arduino Library is a subdirectory of a monorepo, you need libraries or versions as dependencies that can't be installed by name from the Arduino library manager, you wrote a script to install them automatically
 
  Path                                         |Contents
 ----------------------------------------------|--------
