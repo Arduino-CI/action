@@ -7,11 +7,13 @@ This repository is for the **GitHub Action** to run [`arduino_ci`](https://githu
 
 - Contributions to your Arduino library are tested automatically, _without_ the need for hardware present
 - Example sketches in your `examples/` directory are compiled automatically, to detect broken code in the default branch
-- `library.properties` is scanned for correctness
+
+### See Also
+* [`arduino-lint` action](https://github.com/marketplace/actions/arduino-arduino-lint-action) for verifying metadata (e.g. `library.properties`) and structural aspects of a library
 
 ## Adding Arduino CI Pull Request Tests To Your Project
 
-1. Create a new YAML file in your repository's `.github/workflows` directory, e.g. `.github/workflows/arduino_test_runner.yml`
+1. Create a new YAML file in your repository's `.github/workflows` directory, e.g. `.github/workflows/arduino_ci.yml`
 2. Copy an example workflow from below into that new file, no extra configuration required
 3. Commit that file to a new branch
 4. Open up a pull request and observe the action working
@@ -20,7 +22,15 @@ This repository is for the **GitHub Action** to run [`arduino_ci`](https://githu
 
 ### Configuring a Workflow to Use the GitHub Action
 
-These contents for `.github/workflows/arduino_test_runner.yml` should work for most people.
+There are several ways to specify what version of the action to run.
+
+Value for `uses:`              | Meaning | Pros | Cons
+-------------------------------|---------|------|------
+`Arduino-CI/action@v0.1.2`     | exact version | Complete control | Adopt new versions manually, which may be tiresome if you have many libraries
+`Arduino-CI/action@latest`     | bleeding-edge unreleased `arduino_ci` version | Receive latest features & fixes automatically | High risk of encountering breaking changes or new bugs
+`Arduino-CI/action@stable-1.x` | use highest available `arduino_ci` version that is < `2.0.0` | Receive latest features & fixes automatically, but avoids breaking changes | Not a 100% guarantee against unintended CI changes
+
+Using `Arduino-CI/action@stable-1.x` is **recommended**, so the contents listed below for `.github/workflows/arduino_ci.yml` should work for most users.
 
 ```yml
 ---
@@ -34,8 +44,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: Arduino-CI/action@v0.1.2   # v0.1.2 or the latest version
+      - uses: Arduino-CI/action@stable-1.x   # or latest, or a pinned version
         env:
+          # Not all libraries are in the root directory of a repository.
+          # Specifying the path of the library here (relative to the root
+          # of the repository) will adjust that.
+          #
+          # The default is the current directory
+          #
+          # USE_SUBDIR: .
+
           # Not all libraries include examples or unit tests.  The default
           #  behavior of arduino_ci is to assume that "if the files don't
           #  exist, then they were not MEANT to exist".  In other words,
@@ -45,38 +63,23 @@ jobs:
           #
           # If you'd rather have the test runner fail the test in the
           #  absence of either tests or examples, uncommenting either of
-          #  the following lines (as appropriate) will enforce that.
+          #  the following variables to 'true' (as appropriate) will
+          #  enforce that.
           #
           # EXPECT_EXAMPLES: false
           # EXPECT_UNITTESTS: false
-
-          # Scanning library.properties for issues is a relatively new
-          #  feature, and we may not have implemented it perfectly just
-          #  yet.
-          #
-          # If you find that it incorrectly fails your library, you can
-          #  skip it.  (Please open an issue against arduino_ci as well
-          #  so that it can be fixed.)
-          #
-          # SKIP_LIBRARY_PROPERTIES: false
-
-          # Not all libraries are in the root directory of a repository.
-          # Specifying the path of the library here (relative to the root
-          # of the repository) will adjust that.
-          #
-          # The default is the current directory
-          #
-          # USE_SUBDIR: .
 
           # Although dependencies will be installed automatically via the
           # library manager, your library under test may require an
           # unofficial version of a dependency.  In those cases, the custom
           # libraries must be insalled prior to the test execution; those
           # installation commands should be placed in a shell script (that
-          # will be executed by /bin/sh) and the shell script in your repo.
+          # will be executed by /bin/sh) stored in your library.
           #
           # Then, set this variable to the path to that file (relative to
-          # the repository root)
+          # the root of your repository).  The script will be run from
+          # within the Arduino libraries directory; you should NOT attempt
+          # to find that directory nor change to it from within the script.
           #
           # CUSTOM_INIT_SCRIPT: install_dependencies.sh
 ```
@@ -119,11 +122,12 @@ The same Docker image used by the GitHub action is available for local testing, 
 
 ### Your Arduino Libraries directory has everything set up just right; you just want to get up and running and not worry about dependencies at all
 
-Path                               |Contents
------------------------------------|--------
-`/pathTo/Arduino/libraries`        | Arduino's libraries directory
-`/pathTo/Arduino/libraries/mylib`  | Your library under test, called `mylib`
-`/pathTo/Arduino/libraries/custom` | A custom library
+Component                               |Path
+----------------------------------------|----
+Arduino's "libraries" directory         | `/pathTo/Arduino/libraries`
+Your library under test, called `mylib` | `/pathTo/Arduino/libraries/mylib`
+A custom library `mylib` depends on     | `/pathTo/Arduino/libraries/custom`
+
 
 In this situation, you've got a mix of libraries installed locally (the one that will be tested amongst any possible dependencies), and they all work as expected (even though you're not quite sure all of them are up to date, nor whether they have local modifications that aren't part of the official library release).  This setup won't work in CI, but by volume-mounting the libraries directory into the container and using your own library as the working directory, you can ensure that arduino_ci is using the _exact_ same set of dependencies.
 
@@ -141,10 +145,10 @@ docker run --rm \
 
 ### Your Arduino Library uses only "official" library versions as dependencies
 
- Path                              |Contents
------------------------------------|--------
-`/pathTo/Arduino/libraries`        | Arduino's libraries directory
-`/pathTo/Arduino/libraries/mylib`  | Your library under test
+Component                               |Path
+----------------------------------------|----
+Arduino's "libraries" directory         | `/pathTo/Arduino/libraries`
+Your library under test, called `mylib` | `/pathTo/Arduino/libraries/mylib`
 
 In this situation, the only libraries you need for your library to work are those that you've downloaded directly from the library manager and no special modifications need to be made.  We simply volume mount the library under test into the container, set that directory to be the working directory, and let the `arduino_ci` test runner install the dependencies directly.
 
@@ -160,12 +164,12 @@ docker run --rm \
 
 ### Your Arduino Library uses libraries or versions as dependencies that can't be installed by name from the Arduino library manager (but you wrote a script to install them automatically)
 
- Path                                         |Contents
-----------------------------------------------|--------
-`/pathTo/Arduino/libraries`                   | Arduino's libraries directory
-`/pathTo/Arduino/libraries/mylib`             | Your library under test
-`/pathTo/Arduino/libraries/mylib/install.sh`  | Shell script to install custom library
-`/pathTo/Arduino/libraries/custom`            | A custom library
+Component                                |Path
+-----------------------------------------|----
+Arduino's "libraries" directory          | `/pathTo/Arduino/libraries`
+Your library under test, called `mylib`  | `/pathTo/Arduino/libraries/mylib`
+Shell script to install `custom` library | `/pathTo/Arduino/libraries/mylib/install.sh`
+A custom library `mylib` depends on      | `/pathTo/Arduino/libraries/custom`
 
 In this situation, you have a custom library that can't be installed by the library manager.  Fortunately, you've supplied an `install.sh` script that will download and unpack a library to the current working directory (which Arduino CI's test runner will run from inside the container's Arduino libraries directory).  Note the _relative_ path used for `install.sh`.
 
@@ -180,14 +184,15 @@ docker run --rm \
 
 ### Your Arduino Library is a subdirectory of a monorepo, you need libraries or versions as dependencies that can't be installed by name from the Arduino library manager, you wrote a script to install them automatically
 
- Path                                         |Contents
-----------------------------------------------|--------
-`/pathTo/Arduino/libraries`                   | Arduino's libraries directory
-`/pathTo/Arduino/libraries/custom`            | A custom library
-`/pathTo/Monorepo/mylib`                      | Your library under test
-`/pathTo/Monorepo/mylib/install.sh`           | Shell script to install custom library
+Component                                |Path
+-----------------------------------------|----
+Arduino's "libraries" directory          | `/pathTo/Arduino/libraries`
+A custom library `mylib` depends on      | `/pathTo/Arduino/libraries/custom`
+Your library under test, called `mylib`  | `/pathTo/Monorepo/mylib`
+Shell script to install `custom` library | `/pathTo/Monorepo/mylib/install.sh`
 
-All the bells and whistles.
+
+All the bells and whistles.  Note that the relative path of `install.sh` is considered _after_ the `USE_SUBDIR` directory has been applied.
 
 ```bash
 docker run --rm \
