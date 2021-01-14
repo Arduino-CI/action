@@ -20,8 +20,8 @@
 * `git commit -m "vVERSION bump"`
 * `git tag -a vVERSION -m "Released version VERSION"`
 * `git push upstream`
-* `git push upstream master:latest`
-* `git push upstream master:stable-1.x`
+* `git push -f upstream master:latest`
+* `git push -f upstream master:stable-1.x`
 * `git push upstream --tags`
 * `git checkout master`
 * `git stash pop`
