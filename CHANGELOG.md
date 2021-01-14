@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
+- Now uses `arduino_ci` [version `1.3.0`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#130---2021-01-13)
 
 ### Deprecated
 
 ### Removed
+- The use of `SKIP_LIBRARY_PROPERTIES`
 
 ### Fixed
 
