@@ -44,6 +44,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: Arduino-CI/action@stable-1.x
+```
+
+The full set of configuration options for the action is enumerated here; note that if the `env:` section is empty, it must be commented out or deleted as well.
+
+```yml
+---
+name: Arduino_CI
+
+on: [pull_request]
+
+jobs:
+  arduino_ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
       - uses: Arduino-CI/action@stable-1.x   # or latest, or a pinned version
         env:
           # Not all libraries are in the root directory of a repository.
@@ -52,7 +69,7 @@ jobs:
           #
           # The default is the current directory
           #
-          # USE_SUBDIR: .
+          USE_SUBDIR: .
 
           # Not all libraries include examples or unit tests.  The default
           #  behavior of arduino_ci is to assume that "if the files don't
@@ -66,8 +83,8 @@ jobs:
           #  the following variables to 'true' (as appropriate) will
           #  enforce that.
           #
-          # EXPECT_EXAMPLES: false
-          # EXPECT_UNITTESTS: false
+          EXPECT_EXAMPLES: false
+          EXPECT_UNITTESTS: false
 
           # Although dependencies will be installed automatically via the
           # library manager, your library under test may require an
