@@ -16,11 +16,9 @@
 * `git stash save` (at least before the push step, but easiest here).
 * `git pull --rebase`
 * Update the sections of `CHANGELOG.md`
-* `git add README.md CHANGELOG.md
+* `git add README.md CHANGELOG.md`
 * `git commit -m "vVERSION bump"`
 * `git tag -a vVERSION -m "Released version VERSION"`
-* `gem build arduino_ci.gemspec`
-* `git stash pop`
 * `git push upstream`
 * `git push upstream master:latest`
 * `git push upstream master:stable-1.x`

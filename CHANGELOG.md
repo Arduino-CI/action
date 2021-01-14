@@ -9,16 +9,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
-- Now uses `arduino_ci` [version `1.3.0`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#130---2021-01-13)
 
 ### Deprecated
 
 ### Removed
-- The use of `SKIP_LIBRARY_PROPERTIES`
 
 ### Fixed
 
 ### Security
+
+
+## [Unreleased]
+### Changed
+- Now uses `arduino_ci` [version `1.3.0`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#130---2021-01-13)
+
+### Removed
+- The use of `SKIP_LIBRARY_PROPERTIES`
 
 
 ## [0.1.2] - 2021-01-06
@@ -46,7 +52,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Initial implementation of action
 
 
-[Unreleased]: https://github.com/Arduino-CI/action/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/Arduino-CI/action/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Arduino-CI/arduino_ci/compare/v0.0.0...v0.1.0
