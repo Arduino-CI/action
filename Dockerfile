@@ -46,9 +46,11 @@ RUN true \
       g++ \
       time \
       python \
-      python-pip \
       python3 \
       python3-pip \
+  && curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py \
+  && python get-pip.py \
+  && rm -rf get-pip.py \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && pip install pyserial \
