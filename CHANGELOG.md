@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Pre-installation of platforms declared in `default.yml`
 
 ### Changed
+- Now uses `arduino_ci` [version `1.5.0`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#150---2023-01-17)
 
 ### Deprecated
 

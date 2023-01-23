@@ -8,8 +8,8 @@ ARG BUILD_VERSION
 # Values we set in more than one place in this file
 ARG ARDUINO_CI_ACTION_REPO="https://github.com/ArduinoCI/action"
 ARG ARDUINO_CI_MAINTAINER="Arduino Continuous Integration <arduino.continuous.integration@gmail.com>"
-ARG ARDUINO_CI_GITREPO="https://github.com/ArduinoCI/arduino_ci.git"
-ARG ARDUINO_CI_GITREF="tag: 'v1.3.0'"
+ARG ARDUINO_CI_GITREPO="https://github.com/Arduino-CI/arduino_ci.git"
+ARG ARDUINO_CI_GITREF="tag: 'v1.5.0'"
 #ARG ARDUINO_CI_GITREPO="https://github.com/ianfixes/arduino_ci.git"
 #ARG ARDUINO_CI_GITREF="branch: '2021-01-07_beta'"
 
