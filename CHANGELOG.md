@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Pre-installation of platforms declared in `default.yml`
 
 ### Changed
 
