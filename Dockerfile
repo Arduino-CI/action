@@ -46,11 +46,9 @@ RUN true \
       g++ \
       time \
       jq \
-      python \
-      python-yaml \
-      python-pip \
       python3 \
       python3-pip \
+      python3-yaml \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && pip install pyserial \
