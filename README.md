@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: Arduino-CI/action@stable-1.x
 ```
 
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: Arduino-CI/action@stable-1.x   # or latest, or a pinned version
         env:
           # Not all libraries are in the root directory of a repository.

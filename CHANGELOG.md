@@ -7,10 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- ~~Pre-installation of platforms declared in `default.yml`~~
 
 ### Changed
-- Now uses `arduino_ci` [version `1.5.0`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#150---2023-01-17)
 
 ### Deprecated
 
@@ -21,7 +19,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Security
 
 
-## [0.1.3] - 2013-01-13
+## [0.1.5] - 2023-01-23
+### Added
+- ~~Pre-installation of platforms declared in `default.yml`~~
+
+### Changed
+- Now uses `arduino_ci` [version `1.5.0`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#150---2023-01-17)
+
+
+## [0.1.3] - 2021-01-13
 ### Changed
 - Now uses `arduino_ci` [version `1.3.0`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#130---2021-01-13)
 
@@ -54,7 +60,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Initial implementation of action
 
 
-[Unreleased]: https://github.com/Arduino-CI/action/compare/v0.1.3...HEAD
+[Unreleased]: https://github.com/Arduino-CI/action/compare/v0.1.5...HEAD
+[0.1.3]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.3...v0.1.5
 [0.1.3]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.0...v0.1.1
