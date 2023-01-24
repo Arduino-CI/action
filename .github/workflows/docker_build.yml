@@ -1,0 +1,17 @@
+# via https://docs.github.com/en/free-pro-team@latest/actions/guides/publishing-docker-images
+# and https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#example-using-multiple-events-with-activity-types-or-configuration
+name: Build Docker image
+on: [push, pull_request]
+
+jobs:
+  just_build:
+    name: Verify the image can build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Verify Docker build
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: false
