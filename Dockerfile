@@ -73,16 +73,16 @@ RUN curl -fsSL "https://raw.githubusercontent.com/arduino/arduino-cli/master/ins
   && echo "Now running arduino ensure_arduino_installation.rb" \
   && bundle exec time /action/bundle/ruby/2.6.0/bin/ensure_arduino_installation.rb
 
-# Install common platforms by converting YAML to JSON and generating installation commands to run
-#
-# Although it seems wasteful to pull in python dependencies for just this, remember that (some) arduino
-# platforms themselves require python to be available on the host, so we are taking advantage of a
-# package that is already required.
-RUN true \
-  && python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout)' < $(bundle show arduino_ci)/misc/default.yml \
-  | jq -r '.packages | to_entries[] \
-           | "arduino-cli core install \(.key) --additional-urls \(.value.url)"' \
-  | sh
+# # Install common platforms by converting YAML to JSON and generating installation commands to run
+# #
+# # Although it seems wasteful to pull in python dependencies for just this, remember that (some) arduino
+# # platforms themselves require python to be available on the host, so we are taking advantage of a
+# # package that is already required.
+# RUN true \
+#   && python3 -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout)' < $(bundle show arduino_ci)/misc/default.yml \
+#   | jq -r '.packages | to_entries[] \
+#            | "arduino-cli core install \(.key) --additional-urls \(.value.url)"' \
+#   | sh
 
 
 # Just like that
