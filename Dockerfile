@@ -6,12 +6,17 @@ ARG BUILD_REVISION
 ARG BUILD_VERSION
 
 # Values we set in more than one place in this file
+ARG ARDUINO_CI_VERSION=1.6.1
 ARG ARDUINO_CI_ACTION_REPO="https://github.com/ArduinoCI/action"
 ARG ARDUINO_CI_MAINTAINER="Arduino Continuous Integration <arduino.continuous.integration@gmail.com>"
+
+## IF USING A RELEASED GEM
 ARG ARDUINO_CI_GITREPO="https://github.com/Arduino-CI/arduino_ci.git"
-ARG ARDUINO_CI_GITREF="tag: 'v1.5.0'"
-#ARG ARDUINO_CI_GITREPO="https://github.com/ianfixes/arduino_ci.git"
-#ARG ARDUINO_CI_GITREF="branch: '2021-01-07_beta'"
+ARG ARDUINO_CI_GITREF="tag: 'v$ARDUINO_CI_VERSION'"
+## ELSE
+# ARG ARDUINO_CI_GITREPO="https://github.com/ianfixes/arduino_ci.git"
+# ARG ARDUINO_CI_GITREF="branch: '2023-06-07_nano_every'"
+## END
 
 LABEL com.github.actions.name="Arduino CI" \
       com.github.actions.description="Unit testing and example compilation for Arduino libraries" \
@@ -27,8 +32,11 @@ LABEL com.github.actions.name="Arduino CI" \
       org.opencontainers.image.documentation=$ARDUINO_CI_ACTION_REPO \
       org.opencontainers.image.vendor="Arduino CI" \
       org.opencontainers.image.description="Unit testing and example compilation for Arduino libraries" \
-      repository=$$ARDUINO_CI_ACTION_REPO \
-      homepage=$ARDUINO_CI_ACTION_REPO
+      repository=$ARDUINO_CI_ACTION_REPO \
+      homepage=$ARDUINO_CI_ACTION_REPO \
+      arduino_ci_gem_version=$ARDUINO_CI_VERSION \
+      arduino_ci_gem_repo=$ARDUINO_CI_GITREPO \
+      arduino_ci_gitref=$ARDUINO_CI_GITREF
 
 # Values for debugging
 ENV BUILD_DATE=$BUILD_DATE \
@@ -58,8 +66,8 @@ RUN true \
 RUN true \
   && mkdir -p /action/bundle \
   && echo "source 'https://rubygems.org'" > $BUNDLE_GEMFILE \
-#  && echo "gem 'arduino_ci', git: '$ARDUINO_CI_GITREPO', $ARDUINO_CI_GITREF" >> $BUNDLE_GEMFILE \
-  && echo "gem 'arduino_ci', '=1.3.0'" >> $BUNDLE_GEMFILE \
+  && echo "gem 'arduino_ci', git: '$ARDUINO_CI_GITREPO', $ARDUINO_CI_GITREF" >> $BUNDLE_GEMFILE \
+#  && echo "gem 'arduino_ci', '=$ARDUINO_CI_VERSION'" >> $BUNDLE_GEMFILE \
   && cat $BUNDLE_GEMFILE \
   && bundle install --gemfile /action/Gemfile --path /action/bundle \
   && find /action |grep arduino_ci.rb

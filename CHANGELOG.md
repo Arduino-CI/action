@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
-
+- Now uses `arduino_ci` [version `1.6.1`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#161---2023-06-08)
 ### Deprecated
 
 ### Removed
