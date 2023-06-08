@@ -6,11 +6,11 @@ ARG BUILD_REVISION
 ARG BUILD_VERSION
 
 # Values we set in more than one place in this file
-ARG ARDUINO_CI_VERSION=1.6.1
+ARG ARDUINO_CI_VERSION=1.6.2
 ARG ARDUINO_CI_ACTION_REPO="https://github.com/ArduinoCI/action"
 ARG ARDUINO_CI_MAINTAINER="Arduino Continuous Integration <arduino.continuous.integration@gmail.com>"
 
-## IF USING A RELEASED GEM
+## IF USING A RELEASED GEM - also check lower in the file
 ARG ARDUINO_CI_GITREPO="https://github.com/Arduino-CI/arduino_ci.git"
 ARG ARDUINO_CI_GITREF="tag: 'v$ARDUINO_CI_VERSION'"
 ## ELSE
@@ -46,6 +46,7 @@ ENV BUILD_DATE=$BUILD_DATE \
 ENV BUNDLE_GEMFILE=/action/Gemfile \
     DEBIAN_FRONTEND=noninteractive
 
+# Note that python is installed not because we need it but because Arduino platforms need it
 RUN true \
   && apt-get update \
   && apt-get install -qq --no-install-recommends \
@@ -66,8 +67,11 @@ RUN true \
 RUN true \
   && mkdir -p /action/bundle \
   && echo "source 'https://rubygems.org'" > $BUNDLE_GEMFILE \
-  && echo "gem 'arduino_ci', git: '$ARDUINO_CI_GITREPO', $ARDUINO_CI_GITREF" >> $BUNDLE_GEMFILE \
-#  && echo "gem 'arduino_ci', '=$ARDUINO_CI_VERSION'" >> $BUNDLE_GEMFILE \
+## IF USING A RELEASED GEM
+  && echo "gem 'arduino_ci', '=$ARDUINO_CI_VERSION'" >> $BUNDLE_GEMFILE \
+## ELSE
+#  && echo "gem 'arduino_ci', git: '$ARDUINO_CI_GITREPO', $ARDUINO_CI_GITREF" >> $BUNDLE_GEMFILE \
+## END
   && cat $BUNDLE_GEMFILE \
   && bundle install --gemfile /action/Gemfile --path /action/bundle \
   && find /action |grep arduino_ci.rb
