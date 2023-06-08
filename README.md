@@ -26,7 +26,7 @@ There are several ways to specify what version of the action to run.
 
 Value for `uses:`              | Meaning | Pros | Cons
 -------------------------------|---------|------|------
-`Arduino-CI/action@v0.1.2`     | exact version | Complete control | Adopt new versions manually, which may be tiresome if you have many libraries
+`Arduino-CI/action@v0.1.6`     | exact version | Complete control | Adopt new versions manually, which may be tiresome if you have many libraries
 `Arduino-CI/action@latest`     | bleeding-edge unreleased `arduino_ci` version | Receive latest features & fixes automatically | High risk of encountering breaking changes or new bugs
 `Arduino-CI/action@stable-1.x` | use highest available `arduino_ci` version that is < `2.0.0` | Receive latest features & fixes automatically, but avoids breaking changes | Not a 100% guarantee against unintended CI changes
 

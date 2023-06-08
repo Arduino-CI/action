@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
-- Now uses `arduino_ci` [version `1.6.1`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#161---2023-06-08)
+
 ### Deprecated
 
 ### Removed
@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Security
 
+
+
+## [0.1.6] - 2023-06-08
+### Changed
+- Now uses `arduino_ci` [version `1.6.1`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#161---2023-06-08)
 
 ## [0.1.5] - 2023-01-23
 ### Added
@@ -60,7 +65,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Initial implementation of action
 
 
-[Unreleased]: https://github.com/Arduino-CI/action/compare/v0.1.5...HEAD
+[Unreleased]: https://github.com/Arduino-CI/action/compare/v0.1.6...HEAD
+[0.1.6]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.3...v0.1.5
 [0.1.3]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Arduino-CI/arduino_ci/compare/v0.1.1...v0.1.2
