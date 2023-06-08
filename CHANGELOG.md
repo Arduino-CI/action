@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.6] - 2023-06-08
 ### Changed
-- Now uses `arduino_ci` [version `1.6.1`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#161---2023-06-08)
+- Now uses `arduino_ci` [version `1.6.2`](https://github.com/Arduino-CI/arduino_ci/blob/master/CHANGELOG.md#162---2023-06-08)
 
 ## [0.1.5] - 2023-01-23
 ### Added
